@@ -27,7 +27,11 @@ static int led_on_off_cb(uint16_t obj_inst_id, uint16_t res_id, uint16_t res_ins
 	int ret = 0;
 	uint32_t led_val;
 
+	LOG_INF("obj_inst_id:%d, res_id:%d, res_inst_id:%d", obj_inst_id, res_id, res_inst_id);
+	LOG_HEXDUMP_INF(data, data_len, "engine");
+
 	led_val = *(uint8_t *)data;
+	LOG_INF("LED Value:%d",led_val);
 	if (led_val != led_state) {
 		ret = gpio_pin_set_dt(&led_gpio, (int)led_val);
 		if (ret) {
@@ -45,6 +49,7 @@ static int led_on_off_cb(uint16_t obj_inst_id, uint16_t res_id, uint16_t res_ins
 		/* TODO: Move to be set by an internal post write function */
 		lwm2m_set_s32(&LWM2M_OBJ(3311, 0, 5852), 0);
 	}
+	LOG_INF("LED Control.");
 
 	return ret;
 }

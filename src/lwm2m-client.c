@@ -384,7 +384,10 @@ int main(void)
 
 	(void)memset(&client_ctx, 0x0, sizeof(client_ctx));
 #if defined(CONFIG_LWM2M_DTLS_SUPPORT)
+	client_ctx.use_dtls = true;
 	client_ctx.tls_tag = CONFIG_LWM2M_APP_TLS_TAG;
+	LOG_ERR("123");
+	LOG_ERR("%p--%d", &client_ctx,client_ctx.use_dtls);
 #endif
 	client_ctx.set_socket_state = socket_state;
 

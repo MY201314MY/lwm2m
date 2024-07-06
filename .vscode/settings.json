@@ -4,6 +4,7 @@
       "${workspaceFolder}/**",
     ],
     "files.associations": {
+      "Kconfig": "tex",
       "device.h": "c",
       "socket.h": "c",
       "device_runtime.h": "c",
@@ -42,7 +43,8 @@
       "uart_async.h": "c",
       "config_flash.h": "c",
       "configuration.h": "c",
-      "app_reboot.h": "c"
+      "app_reboot.h": "c",
+      "conn_mgr_monitor.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled",
     "C_Cpp.default.compilerPath": "/home/pi/.toolchains/zephyr-sdk-0.16.4/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc"

@@ -98,6 +98,7 @@ static int lwm2m_setup(void)
 
 	/* Security Mode */
 	lwm2m_set_u8(&LWM2M_OBJ(0, 0, 2), IS_ENABLED(CONFIG_LWM2M_DTLS_SUPPORT) ? 0 : 3);
+	/* lwm2m_set_u8(&LWM2M_OBJ(0, 0, 2), IS_ENABLED(CONFIG_LWM2M_DTLS_SUPPORT) ? 2 : 3); */
 #if defined(CONFIG_LWM2M_DTLS_SUPPORT)
 	lwm2m_set_string(&LWM2M_OBJ(0, 0, 3), endpoint);
 	if (sizeof(CONFIG_LWM2M_APP_PSK) > 1) {
@@ -164,7 +165,10 @@ static int lwm2m_setup(void)
 	lwm2m_set_res_buf(&LWM2M_OBJ(3, 0, 7, 1), &usb_mv, sizeof(usb_mv), sizeof(usb_mv), 0);
 	lwm2m_create_res_inst(&LWM2M_OBJ(3, 0, 8, 1));
 	lwm2m_set_res_buf(&LWM2M_OBJ(3, 0, 8, 1), &usb_ma, sizeof(usb_ma), sizeof(usb_ma), 0);
-
+#if 0
+	lwm2m_set_res_buf(&LWM2M_OBJ(0, 0, 3), (void *)eclipse_leshan_ca_crt, sizeof(eclipse_leshan_ca_crt),
+			  sizeof(eclipse_leshan_ca_crt), 0);
+#endif
 	/* setup FIRMWARE object */
 	if (IS_ENABLED(CONFIG_LWM2M_FIRMWARE_UPDATE_OBJ_SUPPORT)) {
 		init_firmware_update();
@@ -384,7 +388,6 @@ int main(void)
 
 	(void)memset(&client_ctx, 0x0, sizeof(client_ctx));
 #if defined(CONFIG_LWM2M_DTLS_SUPPORT)
-	client_ctx.use_dtls = true;
 	client_ctx.tls_tag = CONFIG_LWM2M_APP_TLS_TAG;
 	LOG_ERR("123");
 	LOG_ERR("%p--%d", &client_ctx,client_ctx.use_dtls);
